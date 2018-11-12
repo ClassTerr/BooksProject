@@ -1,3 +1,7 @@
 .paginator {
     
 }
+
+.disabled {
+    pointer-events: none;
+}

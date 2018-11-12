@@ -2,6 +2,7 @@
     <head>
         <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet"/>
         <script src="js/bootstrap/bootstrap.min.js"></script>
+        <link href="css/site.css" rel="stylesheet"/>
     </head>
     <body>
         <div>Hello, see our books:</div>
@@ -18,7 +19,6 @@
 
             $Paginator = new Paginator($conn, $query);
             $results = $Paginator->getData($page, $limit);
-            //echo json_encode($results);
         ?>
 
         <br />

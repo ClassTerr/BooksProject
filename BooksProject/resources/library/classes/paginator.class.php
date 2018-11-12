@@ -20,6 +20,7 @@ class Paginator
 
     public function getData( $page = 1, $limit = 10)
     {
+        $page = max($page, 1);
         $this->_limit = $limit;
         $this->_page = $page;
 
