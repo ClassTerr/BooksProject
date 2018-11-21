@@ -7,33 +7,6 @@
     if something changes such as your database credentials, or a path to a specific resource,
     you'll only need to update it here.
  */
-
-$config = array(
-    "db" => array(
-        "db1" => array(
-            "dbname" => "database1",
-            "username" => "dbUser",
-            "password" => "pa$$",
-            "host" => "localhost"
-        ),
-        "db2" => array(
-            "dbname" => "database2",
-            "username" => "dbUser",
-            "password" => "pa$$",
-            "host" => "localhost"
-        )
-    ),
-    "urls" => array(
-        "baseUrl" => "http://localhost/Books/"
-    ),
-    "paths" => array(
-        "resources" => realpath(dirname(__FILE__) . '../public_html'),
-        "images" => array(
-            "content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
-            "layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
-        )
-    )
-);
  
 /*
     I will usually place the following in a bootstrap file or some type of environment
@@ -59,10 +32,34 @@ defined("CLASSES_PATH")
 
 include_once SERVICES_PATH . '/utils.php';
 include_once LIBRARY_PATH . '/loader.php';
+
+
+
+$GLOBALS = array(
+    "db" => array(
+        "dbname" => "books",
+        "username" => "root",
+        "password" => "",
+        "host" => "localhost",
+        "includeFilename" => SERVICES_PATH . "/database.php"
+    ),
+    "urls" => array(
+        "baseUrl" => "http://localhost:8080/Books/"
+    ),
+    "paths" => array(
+        "resources" => realpath(dirname(__FILE__) . '../public_html'),
+        "images" => array(
+            "content" => $_SERVER["DOCUMENT_ROOT"] . "/images/content",
+            "layout" => $_SERVER["DOCUMENT_ROOT"] . "/images/layout"
+        )
+    )
+);
+
+include_once SERVICES_PATH . '/database.php';
+
 /*
     Error reporting.
  */
 ini_set("error_reporting", "true");
-error_reporting(E_ALL | E_STRCT);
+error_reporting(E_ALL);
 
-?>
