@@ -14,6 +14,7 @@ session_start();//session starts here
 <style>
     .login-panel {
         margin-top: 150px;
+    }
 
 </style>
 
@@ -63,12 +64,17 @@ $dbcon = OpenDb();
 if (isset($_POST['login'])) {
     $user_email = $_POST['email'];
     $user_pass = $_POST['pass'];
+    
+    $q = "select * from users WHERE user_email=? AND user_pass=?";
+    $stmt = $dbcon->prepare($q);
+    
+    $stmt->bind_param("ss", $user_email, $user_pass);
+    
+    $stmt->execute();
 
-    $check_user = "select * from users WHERE user_email='$user_email'AND user_pass='$user_pass'";
+    $user = $stmt->fetch();
 
-    $run = mysqli_query($dbcon, $check_user);
-
-    if (mysqli_num_rows($run)) {
+    if ($user != null) {
         echo "<script>window.open('welcome.php','_self')</script>";
 
         $_SESSION['email'] = $user_email;//here session is used and value of $user_email store in $_SESSION.
