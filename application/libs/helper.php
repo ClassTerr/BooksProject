@@ -2,18 +2,6 @@
 
 class Helper
 {
-    /**
-     * debugPDO
-     *
-     * Shows the emulated SQL query in a PDO statement. What it does is just extremely simple, but powerful:
-     * It combines the raw query and the placeholders. For sure not really perfect (as PDO is more complex than just
-     * combining raw query and arguments), but it does the job.
-     * 
-     * @author Panique
-     * @param string $raw_sql
-     * @param array $parameters
-     * @return string
-     */
     static public function debugPDO($raw_sql, $parameters) {
 
         $keys = array();
@@ -71,5 +59,15 @@ class Helper
             session_start();
         }
         return isset($_SESSION['user']);
+    }
+    
+    public static function userIsAdmin() {
+        if (!isset($_SESSION))
+        {
+            session_start();
+        }
+        return isset($_SESSION['user']) 
+            && isset($_SESSION['is_admin'])
+            && $_SESSION['is_admin'] == 1;
     }
 }

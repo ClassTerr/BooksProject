@@ -47,7 +47,7 @@ class User
     {
        $db = PDOConnection::getConnection();
 
-       $sql = 'SELECT username, password FROM user WHERE username = :login OR email = :login';
+       $sql = 'SELECT username, password, is_admin FROM user WHERE username = :login OR email = :login';
 
        $result = $db->prepare($sql);
        $result->bindParam(":login", $login, PDO::PARAM_STR);
@@ -62,7 +62,7 @@ class User
 
        //comparing passwords
        if(password_verify($password, $dbPassword)) {
-           return static::auth($user['username']);
+           return static::auth($user['username'], $user['is_admin']);
        } else {
            return false;
        }
@@ -101,8 +101,8 @@ class User
         } else {
             $db = PDOConnection::getConnection();
 
-            $sql = 'INSERT INTO user (username, email, password, name, birth_date, registration_date) '
-                . 'VALUES(:username, :email, :password, :name, :birth_date, :registration_date)';
+            $sql = 'INSERT INTO user (username, email, password, name, birth_date, registration_date, is_admin) '
+                . 'VALUES(:username, :email, :password, :name, :birth_date, :registration_date, 0)';
 
             $result = $db->prepare($sql);
 
@@ -115,7 +115,7 @@ class User
             $result->bindParam(':name', $this->name, PDO::PARAM_STR);
             $result->bindParam(':birth_date', $this->birth);
             $result->bindParam(':registration_date', $registrationDate);
-            return $result->execute() && self::auth($this->username);
+            return $result->execute() && self::auth($this->username, false);
         }
 
     }
@@ -192,10 +192,11 @@ class User
      * @param $username user to authorize
      * @return bool result of authorization
      */
-    private static function auth($username)
+    private static function auth($username, $is_admin = 0)
     {
         //Write the username to the session
         $_SESSION['user'] = $username;
+        $_SESSION['is_admin'] = $is_admin;
         return true;
     }
 

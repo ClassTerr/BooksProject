@@ -5,8 +5,16 @@
 	<ul class='hardcover_front'>
 		<li>
 			<div class="coverDesign yellow">
-				<h1>ARTEM</h1>
-				<p>BOOK</p>
+				<h1>
+					<?php 
+					if ($book != null) {
+						print($book->name);
+					}
+					else {
+						echo "Book not found";
+					}
+					?>
+				</h1>
 			</div>
 		</li>
 		<li></li>
@@ -17,7 +25,9 @@
 	<ul class='page'>
 		<li></li>
 		<li>
-			<a class="btn" href="#">Download</a>
+			<?php if ($book != null) :?>
+			<a class="btn" target="_blank" href="<?=$book->link?>">Download</a>
+			<?php endif; ?>
 		</li>
 		<li></li>
 		<li></li>

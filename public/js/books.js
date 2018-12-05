@@ -6,36 +6,7 @@ $("li.book-item").each(function() {
     $this.find(".bk-front > div").css('background-color', $(this).data("color"));
     $this.find(".bk-left").css('background-color', $(this).data("color"));
     $this.find(".back-color").css('background-color', $(this).data("color"));
-  
-    $this.find(".item-details a.button").on('click', function() {
-      displayBookDetails($this);
-    });
   });
-  
-  function displayBookDetails(el) {
-    var $this = $(el);
-    // $('.main-container').addClass('prevent-scroll');
-    $('.main-overlay').fadeIn();
-  
-    $this.find('.overlay-details').clone().prependTo('.main-overlay');
-  
-    $('a.close-overlay-btn').on('click', function(e) {
-      e.preventDefault();
-    //   $('.main-container').removeClass('prevent-scroll');
-      $('.main-overlay').fadeOut();
-      $('.main-overlay').find('.overlay-details').remove();
-    });
-  
-    $('.main-overlay a.preview').on('click', function() {
-      $('.main-overlay .overlay-desc').toggleClass('activated');
-      $('.main-overlay .overlay-preview').toggleClass('activated');
-    });
-  
-    $('.main-overlay a.back-preview-btn').on('click', function() {
-      $('.main-overlay .overlay-desc').toggleClass('activated');
-      $('.main-overlay .overlay-preview').toggleClass('activated');
-    });
-  }
   
   /*
    *  Offcanvas Menu

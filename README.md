@@ -1,1 +1,1 @@
-Simple MVC application for books management that uses mini project.
+Hello! (.-.)

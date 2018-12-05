@@ -8,7 +8,7 @@ class Controller
     public $db = null;
 
     /**
-     * @var null Model
+     * @var null Book
      */
     public $model = null;
 
@@ -18,7 +18,7 @@ class Controller
     function __construct()
     {
         $this->openDatabaseConnection();
-        $this->loadModel();
+        $this->loadBookModel();
     }
 
     /**
@@ -37,14 +37,10 @@ class Controller
         $this->db = new PDO(DB_TYPE . ':host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=' . DB_CHARSET, DB_USER, DB_PASS, $options);
     }
 
-    /**
-     * Loads the "model".
-     * @return object model
-     */
-    public function loadModel()
+    public function loadBookModel()
     {
-        require APP . 'model/model.php';
+        require APP . 'model/Book.php';
         // create new "model" (and pass the database connection)
-        $this->model = new Model($this->db);
+        $this->books_model = new Book($this->db);
     }
 }

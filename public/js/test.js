@@ -1,3 +1,6 @@
+INSERT INTO `book` VALUES ('Author', 'Name', 123, 'Link');
+
+
 var result = [];
 console.log('asd')
 $('.book-item').each((i, el) => {

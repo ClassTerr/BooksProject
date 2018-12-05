@@ -76,6 +76,6 @@ body {
   background-size: contain;
 }
 
-.books-project {
+.books-project, .books-project:hover {
     color: white;
 }

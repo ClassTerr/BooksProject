@@ -19,11 +19,6 @@ class Auth extends Controller
      */
     public function index()
     {
-        // getting all books and amount of books
-        $books = $this->model->getAllbooks();
-        $amount_of_books = $this->model->getAmountOfbooks();
-
-       // load views. within the views we can echo out $books and $amount_of_books easily
         require APP . 'view/_templates/header.php';
         require APP . 'view/books/index.php';
         require APP . 'view/_templates/footer.php';
@@ -83,6 +78,7 @@ class Auth extends Controller
     public function logout()
     {
         unset($_SESSION["user"]);
+        unset($_SESSION["is_admin"]);
 
         //redirect user to the home page
         header("Location:" . URL);
@@ -94,8 +90,8 @@ class Auth extends Controller
     {
         // if we have an id of a book that should be edited
         if (isset($book_id)) {
-            // do getbook() in model/model.php
-            $book = $this->model->getbook($book_id);
+            // do getbook() in model/Book.php
+            $book = $this->books_model->getbook($book_id);
 
             // in a real application we would also check if this db entry exists and therefore show the result or
             // redirect the user to an error page or similar
@@ -117,7 +113,7 @@ class Auth extends Controller
      */
     public function ajaxGetStats()
     {
-        $amount_of_books = $this->model->getAmountOfbooks();
+        $amount_of_books = $this->books_model->getAmountOfbooks();
 
         // simply echo out something. A supersimple API would be possible by echoing JSON here
         echo $amount_of_books;

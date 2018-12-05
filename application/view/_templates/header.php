@@ -32,14 +32,19 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<?php include "bookshelf.php"; ?>
-		<a class="nav-item nav-link active books-project" href="#">BOOKS PROJECT
+		<div class="nav-item nav-link active books-project" href="#">BOOKS PROJECT
 			<span class="sr-only">(current)</span>
-		</a>
+		</div>
 		<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 			<div class="navbar-nav">
 				<a class="order-1 nav-link" href="<?=URL?>">Home</a>
 				<?php if (Helper::userIsAuthorized()) : ?>
 				<a class="order-2 nav-link navbar-right" href="<?=URL?>books">Books</a>
+
+				<?php if (Helper::userIsAdmin()) : ?>
+				<a class="order-2 nav-link navbar-right" href="<?=URL?>books/manage">Manage books</a>
+				<?php endif;?>
+
 				<a class="order-5 nav-link navbar-right" href="<?=URL?>auth/logout">Logout</a>
 				<?php endif;?>
 				<?php if (!Helper::userIsAuthorized()) : ?>
