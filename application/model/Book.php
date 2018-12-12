@@ -30,7 +30,7 @@ class Book
         return $query->fetchAll();
     }
 
-    public function addbook($author, $name, $year, $link)
+    public function addbook($author, $name, $link, $year)
     {
         $sql = "INSERT INTO book (author, name, year, link) VALUES (:author, :name, :year, :link)";
         $query = $this->db->prepare($sql);
